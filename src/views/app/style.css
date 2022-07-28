@@ -1,0 +1,43 @@
+.row-style{
+    cursor: pointer;
+}
+
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  .pdf {
+    background-color: #FFF;
+    overflow: hidden !important;
+    display: grid;
+    grid-template-rows: 190px minmax(10px, 246px) auto 212px 1fr;
+    grid-row-gap: 1em;
+  }
+  
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    min-height: 786px;
+  }
+
+
+  .ag-root-wrapper-body.ag-layout-normal {
+    height: auto !important;
+  }
+  
+  @media print {
+    .table-container table {
+        page-break-inside: auto;
+    }
+    .table-container tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+    .table-container thead {
+      display: table-header-group;
+    }
+    .table-container tfoot {
+      display: table-footer-group;
+    }
+  }

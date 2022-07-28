@@ -1,0 +1,109 @@
+// import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Row, Card, CardBody, CardTitle, Table } from 'reactstrap';
+import IntlMessages from 'helpers/IntlMessages';
+import { Colxx, Separator } from 'components/common/CustomBootstrap';
+import Breadcrumb from 'containers/navs/Breadcrumb';
+// import {
+//   ReactTableWithPaginationCard,
+//   ReactTableDivided,
+// } from 'containers/ui/ReactTableCards';
+
+
+
+
+const ThirdUI = ({ match }) => {
+
+  const [tableData, setTableData] = useState([])
+
+// const [rows, setRows] = useState(tableData);
+// const [deletedRows, setDeletedRows] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((data) => data.json())
+      .then((data) => setTableData(data))
+  
+  }, [])
+
+  console.log(tableData);
+
+  return (
+    <>
+      <Row>
+        <Colxx xxs="12">
+          <Breadcrumb match={match} />
+          <Separator className="mb-5" />
+        </Colxx>
+      </Row>
+
+      <Row className="mb-5">
+        <Colxx xxs="12">
+          <Card className="mb-4">
+            <CardBody>
+              <CardTitle>
+                <IntlMessages id="table.view-architecture" />
+              </CardTitle>
+
+              <Table striped>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr> */}
+
+{
+                  props.dCandidateList.map((record, index) => {
+                      return (<TableRow key={index} hover>
+                          <td>{record.fullName}</td>
+                          <td>{record.mobile}</td>
+                          <td>{record.bloodGroup}</td>
+                          <td>
+                              <ButtonGroup variant="text">
+                                  <Button><EditIcon color="primary"
+                                      onClick={() => { setCurrentId(record.id) }} /></Button>
+                                  <Button><DeleteIcon color="secondary"
+                                      onClick={() => onDelete(record.id)} /></Button>
+                              </ButtonGroup>
+                          </td>
+                      </TableRow>)
+                  })
+              }
+
+
+
+
+                </tbody>
+              </Table>
+              
+            </CardBody>
+          </Card>
+        </Colxx>
+        </Row>
+ 
+    </>
+  );
+};
+export default ThirdUI;
